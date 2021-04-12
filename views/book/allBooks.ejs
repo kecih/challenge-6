@@ -1,0 +1,50 @@
+<%- include ('../header.ejs') %>
+
+<div class="container mt-4">
+    <div class="text-center">
+        <a href="books/create" class="btn btn-success mb-4 justify-content-center"><i class="fas fa-plus-circle"></i> Add Books</a>
+    </div>
+
+    <div class="row">
+        <% for(let data of ListBooks) { %>
+        <div class="col-md-4">
+            <div class="card mt-3">
+                <div class="card-body bg-dark text-white">
+                    <h5 class="card-title"><%= data.name %></h5>
+                    <h6 class="card-subtitle">Price: <%= data.price %></h6>
+                    <h6 class="card-subtitle">Author: <%= data.authors %></h6>
+                    <h5 class="card-subtitle">Release Date : <%= data.release_date %></h5>
+                    <h5 class="card-subtitle">Stock : <%= data.stock %></h5>
+                    <a href="books/update/<%= data.id %>" class="btn btn-primary mt-3 p-2"><i class="fas fa-edit"></i> Edit</a>
+                    <button type="button" class="btn btn-danger mt-3 p-2" data-bs-toggle="modal"
+                        data-bs-target="#data<%= data.id %>"><i class="far fa-trash-alt"></i>
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="data<%= data.id %>" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Do you really want to delete? <%= data.name %> ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="books/delete/<%= data.id %>" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+
+
+</div>
